@@ -72,6 +72,7 @@ def assembling(message_id, segments_count, send_time, username):
             resp = requests.post('http://127.0.0.1:5000/Segments/Code/', json={
                 "segment": segment,
                 "total_segments": len(segments),
+                "segment_number": i,
                 "message_id": message_id,
                 "send_time": send_time,
                 "username": username
@@ -86,6 +87,7 @@ def assembling(message_id, segments_count, send_time, username):
 def transfer(request):
     print("transfer")
     print("Ответка от канального уровня")
+    print(request.data)
 
     message_id = request.data["Message_id"]
     segment = request.data["Segment"]
@@ -108,7 +110,7 @@ def transfer(request):
 
 
 @api_view(["POST"])
-def receive(request):
+def send(request):
     print("receive")
     print(request.data)
 
